@@ -9,12 +9,32 @@ rules
 
 #include <stdio.h>
 
-const int Live = 1;
-const int Dead = 0;
+ #define Live 1
+ #define Dead 0
+ #define Height 3
+ #define Width 3
+
+ 
+ int grid[Height][Width]={  
+    {Dead, Dead, Dead},
+    {Dead, Live, Dead},
+    {Dead, Dead, Dead}
+};
+
+int row = sizeof(grid) / sizeof(grid[0]);   
+int column = sizeof(grid[0]) / sizeof(grid[0][0]);
 
 
-int get_cell_next_generation(int cell, int neighbors);
-int test_get_cell_next_generation();
+
+ 
+
+                          
+                          
+
+int get_cell_next_generation(int cell, int neighbors); // next cell generation,
+int display_grid(); // prints the whole grid 
+
+
 // -----------------------------------------------------------------------------
 
 
@@ -22,9 +42,7 @@ int test_get_cell_next_generation();
 
 int main(){
 
-printf("%d \n", get_cell_next_generation(Live, 1));
-
-
+display_grid();  
 printf("  passed!\n");
 
 return 0;
@@ -51,4 +69,11 @@ int get_cell_next_generation(int cell, int neighbors){
         }
     }
 }
-
+int display_grid(){
+    for(int i=0; i<row; i++){
+        for(int j=0; j<column; j++){
+            printf("%d ", grid[i][j]);
+        }
+        printf("\n");
+    }
+}
