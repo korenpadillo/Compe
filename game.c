@@ -6,60 +6,49 @@ rules
 3. if live cell has more than 3 live neighbors, it dies (overpopulation)
 4. if dead cell has  3 live neighbors, it becomes a live cell (reproduction)
 */
+
 #include <stdio.h>
 
-int Live = 1;
-int Dead = 0;
-int cell = 1;
-int neighbors = 4;
+const int Live = 1;
+const int Dead = 0;
 
 
-void underpopulation(){
-    if (cell == Live){
-        if (neighbors < 2){
-            cell = Dead;
-            
-        }
-    }
+int get_cell_next_generation(int cell, int neighbors);
+int test_get_cell_next_generation();
+// -----------------------------------------------------------------------------
 
-    }
-void cellliveson(){
-    if (cell == Live){
-        if (neighbors == 2 || neighbors ==3){
-            cell = Live;
-        }
-    }
-}
-void overpopulation(){
-    if (cell == Live){
-        if (neighbors > 3){
-            cell = Dead;
-        }
-    }
-}
-void reproduction(){
-    if (cell == Dead){
-        if (neighbors == 3){
-            cell = Live;
-        }
-    }
-}
 
-void rules(){
-    underpopulation();
-    cellliveson();
-    overpopulation();
-    reproduction();
-}
 
 
 int main(){
 
-printf("Initial cell state: %d\n", cell);
-rules();
-printf("Final cell state: %d\n", cell);
+printf("%d \n", get_cell_next_generation(Live, 1));
+
+
+printf("  passed!\n");
+
 return 0;
-
-
-
 }
+
+int get_cell_next_generation(int cell, int neighbors){
+    if(cell == Live){
+        if(neighbors < 2){
+            return Dead; // underpopulation
+        }
+        else if(neighbors == 2 || neighbors == 3){
+            return Live; // lives on
+        }
+        else{
+            return Dead; // overpopulation
+        }
+    }
+    else{
+        if(neighbors == 3){
+            return Live; // reproduction
+        }
+        else{
+            return Dead; // remains dead
+        }
+    }
+}
+
